@@ -1,11 +1,9 @@
 fn main() {
-    let mut x = 5;
-    println!("The value of x is: {}",x);
+    let tup = (500,"hi",true);
+    println!(" hey {}",tup.0);
+    
+    let (x,y,f) = tup;
+    println!(" hey {}",f);
 
-  let y: u8 = 10;
-  let decimal = 02_55;
-
-  let byte = b'A';
-  println!("hel: {}",byte);
    
 }
