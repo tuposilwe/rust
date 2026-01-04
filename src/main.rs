@@ -2,10 +2,10 @@ fn main() {
     let mut x = 5;
     println!("The value of x is: {}",x);
 
-    x = 15;
-    println!("The value of x is: {}",x);
-    
-    const SECONDS: i8 = 60;
-    println!("The value of seconds is: {}", SECONDS);
+  let y: u8 = 10;
+  let decimal = 02_55;
 
+  let byte = b'A';
+  println!("hel: {}",byte);
+   
 }
