@@ -1,10 +1,26 @@
 fn main() {
-  let array = [1,2,3];
-  println!("{}",array[1]);
-  
-  let mut array2 =[4,5,6];
-  println!("{}",array2[1]);
-  
-  array2[1] = 9;
-  println!("{}",array2[1]);
+    let mut nums = vec![1,2,3];
+
+    nums.push(5);
+    println!("{:?}",nums);
+    
+    nums.pop();
+    println!("{:?}",nums);
+    
+    let mut vec = Vec::new();
+    vec.push("TEST");
+    vec.push("String");
+    println!("{:?}",vec);
+    
+    vec.reverse();
+    println!("{:?}",vec);
+    
+    let vect = Vec::<i32>::with_capacity(2);
+    println!("{:?}",vect.capacity());
+    
+    let v:Vec<i32> = (0..5).collect();
+    println!("{:?}",v);
+    
+
+
 }
