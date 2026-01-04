@@ -1,9 +1,10 @@
 fn main() {
-    let tup = (500,"hi",true);
-    println!(" hey {}",tup.0);
-    
-    let (x,y,f) = tup;
-    println!(" hey {}",f);
-
-   
+  let array = [1,2,3];
+  println!("{}",array[1]);
+  
+  let mut array2 =[4,5,6];
+  println!("{}",array2[1]);
+  
+  array2[1] = 9;
+  println!("{}",array2[1]);
 }
