@@ -65,6 +65,7 @@ fn main() {
     let x  = MyString{text: str1.as_str()};
     // println!("{:?}",x);
 
+    let s: &'static str = "I have static lifetime";
 
 
 }
