@@ -25,6 +25,11 @@ impl Square {
     }
 }
 
+
+struct MyString<'a>{
+    text: &'a str
+}
+
 fn main() {
     let user1 = User{
         active: true,
@@ -46,6 +51,22 @@ fn main() {
     sq.change_width(40);
     println!("{}",sq.whats_my_width());
     println!("{}",sq.area());
+    
+    let r;
+    
+    {
+        let x = 5;
+        r = x;
+    }
+
+    println!("lifetime {}",r);
+    
+    let str1 = String::from("This is my string");
+    let x  = MyString{text: str1.as_str()};
+    // println!("{:?}",x);
+
+
+
 }
 
 fn build_user(username: String) -> User{
@@ -54,4 +75,8 @@ fn build_user(username: String) -> User{
          username,
          sign_in_count: 1
     }
+}
+
+fn example<'a>(x: &'a str) -> &'a str{ // 'a = lifetime
+    x
 }
