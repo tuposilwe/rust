@@ -68,6 +68,26 @@ fn main() {
         println!("{}",top)
     }
 
+    let x = 1;
+    // match x {
+    //     1 | 2 => println!("One or two"),
+    //     _ => println!("Not One or two")
+    // }
+
+    
+    match x {
+        1..5 => println!("Matches"),
+        _ => println!("Not Matching")
+    }
+
+    let x = Some(5);
+    let y = 5;
+
+    match x {
+        Some(10) => println!("10!"),
+        Some(x) if x == y => println!("Matches!"),
+        _ => println!("default!")
+    }
 
 }
 
