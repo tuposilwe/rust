@@ -59,3 +59,15 @@ fn main() {
 fn call_overview(item: &impl Overview){
     println!("{}", item.overview());
 }
+
+// fn overview(item1: &impl Overview, item2: &impl Overview)
+// fn overview<T: Overview>(item1: &T, item2: &T)
+// fn overview(item1: &impl Overview + AnotherTrait)
+// fn overview<T: Overview + AnotherTrait>( item1: &T,item2: &T)
+
+trait Clone: Sized {
+    fn clone(&self) -> Self;
+    fn clone_from(&mut self, source: &Self){
+        *self = source.clone()
+    }
+}
