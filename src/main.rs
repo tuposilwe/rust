@@ -40,6 +40,14 @@ fn main() {
         author: String::from("Deskillz47!"),
     };
 
-    println!("{}", course1.overview());
-    println!("{}", course2.overview());
+    // println!("{}", course1.overview());
+    // println!("{}", course2.overview());
+
+    call_overview(&course1);
+    call_overview(&course2);
+}
+
+fn call_overview<T: Overview>(item: &T){
+    println!("{}", item.overview());
+
 }
