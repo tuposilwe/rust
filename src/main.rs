@@ -1,3 +1,5 @@
+use core::option::Option::{None, Some};
+
 enum Pet {dog,cat,fish}
 
 impl Pet {
@@ -31,4 +33,12 @@ fn main() {
         kind: IpAddrKind::v6,
         address:String::from("::1")
     };
+
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let nothing : Option<i8> = None;
+
+    let x: i32 = 5;
+    let y: Option<i32> = Some(5);
+    // let sum = x + y;
 }
