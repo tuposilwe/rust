@@ -1,4 +1,5 @@
 use rand::prelude::*;
+use std::collections::BinaryHeap;
 
 
 fn main (){   
@@ -40,5 +41,21 @@ fn main (){
 
     nums.shuffle(&mut rand::rng());
     println!("{:?}", nums);
+
+
+    let mut bheap = BinaryHeap::new();
+
+    bheap.push(20);
+    bheap.push(1);
+    bheap.push(18);
+    bheap.push(5);
+
+    bheap.pop();
+
+    println!("{:?}", bheap);
+
+    println!("{:?}", bheap.peek()); // peek is going to return Option<T>, return None if empty, or Some(T) otherwise
+
+    println!("{:?}", bheap);
 
 }
