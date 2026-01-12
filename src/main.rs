@@ -51,6 +51,24 @@ fn main() {
     what_pet("Dog");
     what_pet("Cat");
     what_pet("Cow");
+
+    let dog2 = Some(Pet::cat);
+    if let Some(Pet::dog) = dog2{
+        println!("The animal is a dog!")
+    }else {
+        println!("Not a dog!")
+    }
+
+    let mut stack = Vec::new();
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    while let Some(top) = stack.pop() {
+        println!("{}",top)
+    }
+
+
 }
 
 fn plus_one(x: Option<i32>) -> Option<i32>{
