@@ -1,98 +1,44 @@
-// struct Point<T, U> {
-//     x: T,
-//     y: U,
-// }
+use rand::prelude::*;
 
-trait Overview {
-    fn overview(&self) -> String {
-        String::from("This is a Rust course")
-    }
-}
 
-struct Course {
-    headline: String,
-    author: String,
-}
+fn main (){   
+ let mut nums: Vec<i32> = vec![];
 
-impl Drop for Course {
-    fn drop(&mut self) {
-        println!("Dropping: {}", self.author)
-    }
-}
+    nums.push(1);
+    nums.push(2);
+    nums.push(3);
 
-struct AnotherCourse {
-    headline: String,
-    author: String,
-}
+    let pop = nums.pop(); //Option<T>, return None or Some(T)
 
-impl Overview for Course {
-    // fn overview(&self) -> String {
-    //     format!("{}, {}", self.author, self.headline)
-    // }
-}
-impl Overview for AnotherCourse {
-    fn overview(&self) -> String {
-        format!("{}, {}", self.author, self.headline)
-    }
-}
+    println!("{:?}", pop);
 
-use std::ops::Add;
+    let two = nums[1]; //copy
+    // &nums[1], creates a reference if copy is not available
 
-#[derive(Debug)]
-struct Point<T> {
-    x: T,
-    y: T,
-}
+    println!("{}", two);
 
-impl<T> Add for Point<T>
-where
-    T: Add<Output = T>,
-{
-    type Output = Self;
-    fn add(self, rhs: Self) -> Self {
-        Point {
-            x: self.x + rhs.x,
-            y: self.y + rhs.y,
-        }
-    }
-}
+    let one = nums.first(); // return an Option<T>, so None if vec is empty, or Some<T> is [0]
+    println!("{:?}", one);
 
-fn main() {
-    let coord = Point { x: 5.0, y: 5.0 };
-    let coord2 = Point { x: 1.0, y: 2.0 };
+    // .last
+    // .first_mut and .last_mut, so will borrow mutuable references
 
-    let sum = coord + coord2;
-    println!("{:?}", sum);
+    println!("{}", nums.len()); // return a value of the length
+    println!("{}", nums.is_empty()); //bool 
 
-    // let coord = Point { x: 5.0, y: "me" };
-    let course1 = Course {
-        headline: String::from("Headline!"),
-        author: String::from("Rudiger!"),
-    };
-    let course2 = AnotherCourse {
-        headline: String::from("Another Headline!"),
-        author: String::from("Deskillz47!"),
-    };
+    nums.insert(0, 10);
+    nums.insert(3, 12);
+    nums.insert(2, 25);
 
-    // println!("{}", course1.overview());
-    // println!("{}", course2.overview());
+    nums.remove(3);
 
-    // call_overview(&course1);
-    // call_overview(&course2);
-}
+    nums.sort();
+    println!("{:?}", nums);
 
-fn call_overview(item: &impl Overview) {
-    println!("{}", item.overview());
-}
+    nums.reverse();
+    println!("{:?}", nums);
 
-// fn overview(item1: &impl Overview, item2: &impl Overview)
-// fn overview<T: Overview>(item1: &T, item2: &T)
-// fn overview(item1: &impl Overview + AnotherTrait)
-// fn overview<T: Overview + AnotherTrait>( item1: &T,item2: &T)
+    nums.shuffle(&mut rand::rng());
+    println!("{:?}", nums);
 
-trait Clone: Sized {
-    fn clone(&self) -> Self;
-    fn clone_from(&mut self, source: &Self) {
-        *self = source.clone()
-    }
 }
