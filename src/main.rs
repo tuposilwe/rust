@@ -1,40 +1,32 @@
-use std::fs::File;
-use std::io::ErrorKind;
-use std::fs::rename;
-use std::io::Error;
+use std::env;
+use text_colorizer::*;
+
+#[derive(Debug)]
+#[allow(dead_code)]
+struct Arguments {
+    pattern: String,
+    replace: String,
+    input_file: String,
+    output_file: String,
+}
 
 fn main() {
-    //panic!("panicked here!");
-
-    let vec = vec![1];
-
-    let file = File::open("error.txt").expect("Error opening the file!");
-    // let file = match file {
-    //     Ok(file) => file,
-    //     Err(error) => match error.kind() {
-    //         ErrorKind::NotFound => match File::create("error.txt"){
-    //             Ok(file_created) => file_created,
-    //             Err(error) => panic!("Cannot create the file! {:?}",error),
-    //         }
-    //         _ => panic!("It was some other error kind!"),
-    //     }
-    // };
-
-    // open_file().unwrap();
-     rename_file().unwrap();
+    let args: Vec<String> = env::args().skip(1).collect();
+    if args.len() != 4 {
+        print_help();
+        eprintln!(
+            "{} wrong number of arguments givev. Expected 4 got {}",
+            "Error".red().bold(),
+            args.len()
+        );
+        std::process::exit(1);
+    }
 }
 
-fn open_file() -> Result<File, Error> {
-    let file = File::open("error.txt")?;
-    Ok(file)
+fn print_help() {
+    eprintln!(
+        "{} - replace a string with a new string",
+        "find and Replace".green()
+    );
+    eprintln!("Usage: <target string> <replacement string> <INPUT FILE> <OUTPUT FILE>");
 }
-
-fn rename_file() -> Result<(), Error> {
-    let file = rename("error.txt", "renamed.txt")?;
-    Ok(file)
-}
-
-// enum Result<T, E> {
-//     Ok(T),
-//     Err(E),
-// }
