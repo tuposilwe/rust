@@ -52,10 +52,27 @@ fn main() {
             population: rng.random_range(0..=100),
         },
     ];
+    
 
     // Sort the populated list
     sort_pop(&mut cities);
 
     // Print the list we actually put data into
     println!("{:#?}", cities);
+
+
+    let add = |x: i32| -> i32{
+        x + 1
+    };
+
+    let add_v2 = |x| x + 1;
+    add_v2(2);
+
+    let example = |x| x;
+    let string = example(String::from("my String"));
+    
+
+
+
+
 }
