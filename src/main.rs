@@ -1,11 +1,16 @@
 use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Flagger{
+    is_true: Rc<RefCell<bool>>,
+}
 
 fn main() {
     let t = (12, "eggs"); // created on the stack
     let b = Box::new(t); // created on the heap, but b was stored on the stack
     println!("{:?}", b);
 
-    let x = 5;
+    let x = 5; 
     let y = &x;
 
     // assert_eq!(5,x);
@@ -17,4 +22,20 @@ fn main() {
     let s2 = s1.clone();
     let s3 = s2.clone();
     println!("{}, {} , {}", s1.contains("Point"), s2, s3.contains("er"));
+
+    let flag = Flagger{
+        is_true: Rc::new(RefCell::new(true))
+    };
+
+    // borrow return Ref<T>
+    // borrow_mut return RefMut<T>
+
+    let reference = Rc::new(flag.is_true.clone());
+    println!("{:?}",reference);
+
+    let mut mut_ref = flag.is_true.borrow_mut();
+    *mut_ref = false;
+    println!("{}",mut_ref)
+
+
 }
