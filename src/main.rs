@@ -1,4 +1,4 @@
-use std::sync::{Arc, mpsc};
+use std::sync::{Arc, mpsc,Mutex};
 use std::thread;
 
 fn main() {
@@ -63,13 +63,31 @@ fn main() {
     // }
 
 
-    let rc1 = Arc::new(String::from("Test"));
-    let rc2 = rc1.clone();
+    // let rc1 = Arc::new(String::from("Test"));
+    // let rc2 = rc1.clone();
 
-    std::thread::spawn(move || {
-        rc2;
-    });
+    // std::thread::spawn(move || {
+    //     rc2;
+    // });
 
 
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..8 {
+        let counter = Arc::clone(&counter);
+        let handle = std::thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+         
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("{}",counter.lock().unwrap());
 
 }
