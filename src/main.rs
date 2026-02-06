@@ -1,4 +1,4 @@
-use std::sync::mpsc;
+use std::sync::{Arc, mpsc};
 use std::thread;
 
 fn main() {
@@ -24,8 +24,8 @@ fn main() {
     //     handle.join().unwrap();
     // }
 
-    let (transmitter, receiver) = mpsc::channel();
-    let tx = transmitter.clone();
+    // let (transmitter, receiver) = mpsc::channel();
+    // let tx = transmitter.clone();
 
     // let val = String::from("Transmitting!");
     // thread::spawn(move || {
@@ -35,30 +35,41 @@ fn main() {
     // let msg = receiver.recv().unwrap();
     // println!("{}",msg);
 
-    std::thread::spawn(move || {
-        let vec = vec![
-            String::from("Transmitting"),
-            String::from("From"),
-            String::from("Original"),
-        ];
-        for val in vec {
-            transmitter.send(val).unwrap();
-        }
-    });
+    // std::thread::spawn(move || {
+    //     let vec = vec![
+    //         String::from("Transmitting"),
+    //         String::from("From"),
+    //         String::from("Original"),
+    //     ];
+    //     for val in vec {
+    //         transmitter.send(val).unwrap();
+    //     }
+    // });
+
+    // std::thread::spawn(move || {
+    //     let vec = vec![
+    //         String::from("Clone"),
+    //         String::from("Is"),
+    //         String::from("Transmitting"),
+    //     ];
+    //     for val in vec {
+    //         tx.send(val).unwrap();
+    //     }
+    // });
+
+
+    // for rec in receiver{
+    //     println!("{}",rec);
+    // }
+
+
+    let rc1 = Arc::new(String::from("Test"));
+    let rc2 = rc1.clone();
 
     std::thread::spawn(move || {
-        let vec = vec![
-            String::from("Clone"),
-            String::from("Is"),
-            String::from("Transmitting"),
-        ];
-        for val in vec {
-            tx.send(val).unwrap();
-        }
+        rc2;
     });
 
 
-    for rec in receiver{
-        println!("{}",rec);
-    }
+
 }
