@@ -1,5 +1,25 @@
 use std::sync::{Arc, mpsc,Mutex};
 use std::thread;
+use rayon::prelude::*;
+use num::{ BigUint, One};
+use std::time::Instant;
+
+
+fn factorial(num: u32) -> BigUint{
+    if num == 0 || num == 1{
+        return BigUint::one();
+    }else {
+        (1..=num).map(BigUint::from).reduce(|acc ,x| acc * x).unwrap()
+    }
+}
+
+fn multi_factor(num: u32) -> BigUint{
+    if num == 0 || num == 1{
+        return BigUint::one();
+    }else {
+        (1..=num).into_par_iter().map(BigUint::from).reduce(|| BigUint::one(),|acc,x| acc * x)
+    }
+}
 
 fn main() {
     // let handle = thread::spawn(move || {
@@ -71,23 +91,34 @@ fn main() {
     // });
 
 
-    let counter = Arc::new(Mutex::new(0));
-    let mut handles = vec![];
+    // let counter = Arc::new(Mutex::new(0));
+    // let mut handles = vec![];
 
-    for _ in 0..8 {
-        let counter = Arc::clone(&counter);
-        let handle = std::thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-            *num += 1;
-        });
+    // for _ in 0..8 {
+    //     let counter = Arc::clone(&counter);
+    //     let handle = std::thread::spawn(move || {
+    //         let mut num = counter.lock().unwrap();
+    //         *num += 1;
+    //     });
          
-        handles.push(handle);
-    }
+    //     handles.push(handle);
+    // }
 
-    for handle in handles {
-        handle.join().unwrap();
-    }
+    // for handle in handles {
+    //     handle.join().unwrap();
+    // }
 
-    println!("{}",counter.lock().unwrap());
+    // println!("{}",counter.lock().unwrap());
+
+    // println!("{}",factorial(10));
+
+
+    let now = Instant::now();
+    factorial(5000);
+    println!("{:.2?}",now.elapsed());
+
+    let now = Instant::now();
+    multi_factor(5000);
+    println!("{:.2?}",now.elapsed());
 
 }
